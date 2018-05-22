@@ -1,0 +1,9 @@
+---
+
+  - name: Install mastodon
+    hosts:
+    become: yes
+    roles:
+      - roles/apt
+      - roles/mastodon
+      - roles/nginx
