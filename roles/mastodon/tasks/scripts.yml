@@ -1,12 +1,12 @@
 --
 
 - name: Copy scripts
-  s3:
-    bucket: "mastodon-tfstates"
-    object: "{{ item }}"
+  copy:
+    src: "{{ item }}"
     dest: /tmp/
-    mode: get
-    overwrite: different
+    owner: root
+    group: root
+    mode: 0777
   with_items:
     - script1.sh
     - script2.sh
