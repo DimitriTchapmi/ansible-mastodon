@@ -1,9 +1,64 @@
 ---
 
-  - name: Install mastodon
-    hosts:
-    become: yes
-    roles:
-      - roles/apt
-      - roles/mastodon
-      - roles/nginx
+- name: Ubuntu automatic security updates
+  copy: src=20auto-upgrades dest=/etc/apt/apt.conf.d/20auto-upgrades
+
+- name: Install unattended-upgrades
+  apt: pkg=unattended-upgrades state=latest update_cache=yes
+
+- name: Install apt-transport-https
+  apt:
+    name: apt-transport-https
+    state: latest
+
+- name: Copy scripts
+  copy:
+    src: "{{ item }}"
+    dest: /tmp/
+    owner: root
+    group: root
+    mode: 0777
+  with_items:
+    - script1.sh
+    - script2.sh
+    - script3.sh
+
+- name: Install mastodon packages
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - nginx
+    - imagemagick
+    - ffmpeg
+    - libpq-dev
+    - libxml2-dev
+    - libxslt1-dev
+    - file
+    - git-core
+    - g++
+    - libprotobuf-dev
+    - protobuf-compiler
+    - pkg-config
+    - gcc
+    - autoconf
+    - bison
+    - build-essential
+    - libssl-dev
+    - libyaml-dev
+    - libreadline6-dev
+    - zlib1g-dev
+    - libncurses5-dev
+    - libffi-dev
+    - libgdbm3
+    - libgdbm-dev
+    - redis-server
+    - redis-tools
+    - postgresql
+    - postgresql-contrib
+    - postgresql-client-common
+    - postgresql-client
+    - libidn11-dev
+    - libicu-dev
+    - language-pack-en
+
