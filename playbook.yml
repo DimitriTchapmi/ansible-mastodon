@@ -1,11 +1,15 @@
 ---
 
 - name: Ubuntu automatic security updates
-  hosts: localhost
-  copy: src=20auto-upgrades dest=/etc/apt/apt.conf.d/20auto-upgrades
+  copy:
+    src=20auto-upgrades
+    dest=/etc/apt/apt.conf.d/20auto-upgrades
 
 - name: Install unattended-upgrades
-  apt: pkg=unattended-upgrades state=latest update_cache=yes
+  apt:
+    pkg=unattended-upgrades
+    state=latest
+    update_cache=yes
 
 - name: Install apt-transport-https
   apt:
