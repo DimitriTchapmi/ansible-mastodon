@@ -1,6 +1,7 @@
 ---
 
 - name: Ubuntu automatic security updates
+  hosts: localhost
   copy: src=20auto-upgrades dest=/etc/apt/apt.conf.d/20auto-upgrades
 
 - name: Install unattended-upgrades
