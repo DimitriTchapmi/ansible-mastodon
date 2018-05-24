@@ -3,6 +3,7 @@
 
 - hosts: localhost
   remote_user: root
+  become: yes
 
   tasks:
     - name: Ubuntu automatic security updates
