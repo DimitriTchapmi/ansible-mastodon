@@ -73,3 +73,17 @@
         - libicu-dev
         - language-pack-en
 
+    - name: Copy nginx conf
+      copy:
+        src: mastodon.com.conf
+        dest: /etc/nginx/sites-available/mastodon.com.conf
+        owner: root
+        group: root
+        mode: 0777
+    - name: Activate nginx conf
+      command: ln -s ../sites-available/example.com.conf
+      args:
+        chdir: /etc/nginx/sites-enabled/
+
+
+
