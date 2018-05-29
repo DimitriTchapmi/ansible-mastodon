@@ -86,5 +86,21 @@
       args:
         chdir: /etc/nginx/sites-enabled/
 
+    - name: Copy systemd sevices files
+      copy:
+        src: "{{ item }}"
+        dest: /etc/systemd/system/
+      with_items:
+        - mastodon-sidekiq.service
+        - mastodon-streaming.service
+        - mastodon-web.service
+
+    - name: Enable systemd services
+      command: systemctl enable /etc/systemd/system/mastodon-{{ item }}
+      with_items:
+        - mastodon-sidekiq.service
+        - mastodon-streaming.service
+        - mastodon-web.service
+
 
 

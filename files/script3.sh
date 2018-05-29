@@ -18,7 +18,7 @@ bundle install -j$(getconf _NPROCESSORS_ONLN) --deployment --without development
 yarn install --pure-lockfile
 cd ~/live
 RAILS_ENV=production bundle exec rake mastodon:setup << EOF
-mt.bounaim.net
+mastodon.com
 n
 y
 n
@@ -26,5 +26,5 @@ y
 y
 y
 y
-oussama.bounaim@wescale.fr
+dimitri.tchapmi@wescale.fr
 EOF
