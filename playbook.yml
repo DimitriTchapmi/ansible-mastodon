@@ -75,8 +75,8 @@
 
     - name: Copy nginx conf
       copy:
-        src: mastodon.com.conf
-        dest: /etc/nginx/sites-available/mastodon.com.conf
+        src=mastodon.com.conf
+        dest=/etc/nginx/sites-available/mastodon.com.conf
         owner: root
         group: root
         mode: 0777
