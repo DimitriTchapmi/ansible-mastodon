@@ -8,14 +8,14 @@
   tasks:
     - name: Ubuntu automatic security updates
       copy:
-        src=20auto-upgrades
-        dest=/etc/apt/apt.conf.d/20auto-upgrades
+        src: 20auto-upgrades
+        dest: /etc/apt/apt.conf.d/20auto-upgrades
 
     - name: Install unattended-upgrades
       apt:
-        pkg=unattended-upgrades
-        state=latest
-        update_cache=yes
+        pkg: unattended-upgrades
+        state: latest
+        update_cache: yes
 
     - name: Install apt-transport-https
       apt:
@@ -82,10 +82,12 @@
         mode: 0777
 
     - name: Activate nginx conf
-      command: ln -s ../sites-available/mastodon.com.conf
-      args:
-        chdir: /etc/nginx/sites-enabled/
-        creates: /etc/nginx/sites-enabled/mastodon.com.conf
+      file:
+        src: /etc/sites-available/mastodon.com.conf
+        dest: /etc/nginx/sites-enabled/mastodon.com.conf
+        owner: www-data
+        group: www-data
+        state: link
 
     - name: Copy systemd sevices files
       copy:
@@ -97,11 +99,15 @@
         - mastodon-web.service
 
     - name: Enable systemd services
-      command: systemctl enable /etc/systemd/system/mastodon-{{ item }}
+      systemd:
+        daemon_reload: yes
+        name: "{{ item }}"
+        state: started
+        enabled: yes
       with_items:
-        - mastodon-sidekiq.service
-        - mastodon-streaming.service
-        - mastodon-web.service
+        - mastodon-sidekiq
+        - mastodon-streaming
+        - mastodon-web
 
 
 
