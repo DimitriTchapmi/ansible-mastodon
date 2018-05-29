@@ -90,7 +90,7 @@
     - name: Copy systemd sevices files
       copy:
         src: "{{ item }}"
-        dest: /etc/systemd/system/
+        dest: /etc/systemd/system/{{ item }}
       with_items:
         - mastodon-sidekiq.service
         - mastodon-streaming.service
