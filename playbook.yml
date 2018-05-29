@@ -82,9 +82,10 @@
         mode: 0777
 
     - name: Activate nginx conf
-      command: ln -s ../sites-available/example.com.conf
+      command: ln -s ../sites-available/mastodon.com.conf
       args:
         chdir: /etc/nginx/sites-enabled/
+        creates: /etc/nginx/sites-enabled/mastodon.com.conf
 
     - name: Copy systemd sevices files
       copy:
