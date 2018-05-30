@@ -83,7 +83,7 @@
 
     - name: Activate nginx conf
       file:
-        src: /etc/sites-available/mastodon.com.conf
+        src: /etc/nginx/sites-available/mastodon.com.conf
         dest: /etc/nginx/sites-enabled/mastodon.com.conf
         owner: www-data
         group: www-data
